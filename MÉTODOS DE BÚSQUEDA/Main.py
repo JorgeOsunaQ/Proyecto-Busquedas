@@ -78,4 +78,5 @@ Chetumal,Tlaxcala,Puebla,Tuxla]
 #CREACIÓN LIST CIUDADES
 ciudades = Ciudades(listCiudades)
 
-ciudades.__seeCiudadesYConexiones__()
+ciudades.__trazarRutaProfundidad__('Culiacan','Tepic')
+ciudades.__trazarRutaAmplitud__('Culiacan','Tepic')
