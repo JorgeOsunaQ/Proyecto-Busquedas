@@ -1,4 +1,3 @@
-from Vertice import Vertice
 class Nodo:
 
     def __init__(self, elemento=None):

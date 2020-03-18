@@ -130,6 +130,7 @@ class ListaEnlazada:
     fin=property(get_fin)
 
 #Pruebas vrgas
+'''
 lista=ListaEnlazada()
 lista.addToFront('Culiacan')
 lista.addToFront('Durango')
@@ -145,3 +146,4 @@ lista.removeLast()
 print(lista.impr())
 lista.removeFirst()
 print(lista.impr())
+'''
