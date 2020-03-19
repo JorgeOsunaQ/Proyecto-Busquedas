@@ -8,12 +8,18 @@ class ListaEnlazada:
         self.__fin=None
         self.__count=0
 
-    def addToFront(self,elemento):
+    def get_inicio(self):
+        return self.__inicio
+
+    def get_fin(self):
+        return self.__fin
+
+    def add_to_front(self,elemento):
         if(elemento is None):
             return False
 
         nuevo=Nodo(elemento)
-        if(self.isEmpty()):
+        if(self.is_empty()):
             self.__inicio=self.__fin=nuevo
         else: 
             nuevo.next=self.__inicio
@@ -21,12 +27,12 @@ class ListaEnlazada:
         self.__count+=1
         return True
 
-    def addToRear(self,elemento):
+    def add_to_rear(self,elemento):
         if(elemento is None):
             return False
 
         nuevo=Nodo(elemento)
-        if(self.isEmpty()):
+        if(self.is_empty()):
             self.__inicio=self.__fin=nuevo
         else: 
             self.__fin.next=nuevo
@@ -34,26 +40,26 @@ class ListaEnlazada:
         self.__count+=1
         return True
 
-    def addSorted(self,elemento):
+    def add_sorted(self,elemento):
         pass
 
-    def removeFirst(self):
-        if self.isEmpty():
+    def remove_first(self):
+        if self.is_empty():
             return False
-        temp=self.inicio.element
-        self.__inicio=self.inicio.next
+        temp=self.__inicio.element
+        self.__inicio=self.__inicio.next
 
         self.__count-=1
         return temp
     
-    def removeLast(self):
-        if self.isEmpty():
+    def remove_last(self):
+        if self.is_empty():
             return False
 
         if(self.size()==1):
             return self.removeFirst()
 
-        actual=self.inicio
+        actual=self.__inicio
         anterior=None
 
         while(actual.next!=None):
@@ -71,13 +77,13 @@ class ListaEnlazada:
         if not self.contains(elem):
             return False
 
-        if(elem==self.inicio.element):
+        if(elem==self.__inicio.element):
             return self.removeFirst()
         
-        if(elem==self.fin.element):
+        if(elem==self.__fin.element):
             return self.removeLast()
 
-        actual=self.inicio
+        actual=self.__inicio
         anterior=None
 
         while(elem!=actual.element):
@@ -92,58 +98,28 @@ class ListaEnlazada:
         
     def contains(self, elem):
 
-        if(self.isEmpty()):
+        if(self.is_empty()):
             return False
         
         iterador=self.iterator()
 
-        while(iterador.hasNext()):
+        while(iterador.has_next()):
             if(elem is next(iterador)):
                 return True
 
-    def impr(self):
-        if(self.isEmpty()):
-            return 'No hay tortillas'
-
-        impresion=''
-        iterador=self.iterator()
-        while(iterador.hasNext()):
-                 impresion+='\n'+str(next(iterador))
-        return impresion
-
     def iterator(self):
-        return iter(ListaIterador(self.inicio))
+        return iter(ListaIterador(self.__inicio))
 
-    def isEmpty(self):
+    def is_empty(self):
         return self.__count==0
 
     def size(self):
         return self.__count
 
-    def get_inicio(self):
-        return self.__inicio
-
-    def get_fin(self):
-        return self.__fin
-
     inicio=property(get_inicio)
     fin=property(get_fin)
 
-#Pruebas vrgas
-'''
-lista=ListaEnlazada()
-lista.addToFront('Culiacan')
-lista.addToFront('Durango')
-lista.addToFront('Mazatlan')
-lista.addToFront('Navolato')
-lista.addToFront('Hermosillo')
-lista.addToFront('Tijuana')
-
-print(lista.impr())
-lista.remove('Durango')
-print(lista.impr())
-lista.removeLast()
-print(lista.impr())
-lista.removeFirst()
-print(lista.impr())
-'''
+li=[2,4,5,3,2]
+#li.pop(0)
+li.append(6)
+print(li.pop(0))

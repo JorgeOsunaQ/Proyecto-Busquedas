@@ -15,6 +15,6 @@ class Nodo:
 
     def set_next(self,next):
         self.__next=next    
-
+    
     element=property(get_element)
     next=property(get_next, set_next)

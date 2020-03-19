@@ -7,14 +7,14 @@ class ListaIterador:
         return self
     
     def __next__(self):
-        if not self.hasNext():
+        if not self.has_next():
             raise StopIteration
 
         temp=self.actual.element
         self.actual=self.actual.next
         return temp
 
-    def hasNext(self):
+    def has_next(self):
         return self.actual!=None
 
     
