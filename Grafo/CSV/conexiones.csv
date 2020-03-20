@@ -1,0 +1,68 @@
+Src,Dest,Distancia
+Culiacán,Tepic,1
+Culiacán,Durango,1
+Culiacán,Chihuahua,1
+Culiacán,Hermosillo,1
+Mexicali,Hermosillo,1
+La Paz,Mexicali,1
+Hermosillo,Chihuahua,1
+Chihuahua,Saltillo,1
+Chihuahua,Durango,1
+Saltillo,Durango,1
+Saltillo,Zacatecas,1
+Saltillo,Monterrey,1
+Durango,Zacatecas,1
+Durango,Tepic,1
+Monterrey,Zacatecas,1
+Monterrey,San Luis Potosi,1
+Tepic,Zacatecas,1
+Tepic,Guadalajara,1
+Zacatecas,San Luis Potosi,1
+Zacatecas,Aguascalientes,1
+San Luis Potosi,Ciudad Victoria,1
+San Luis Potosi,Pachuca,1
+San Luis Potosi,Queretaro,1
+San Luis Potosi,Guadalajara,1
+San Luis Potosi,Guanajuato,1
+San Luis Potosi,Xalapa,1
+Guadalajara,Colima,1
+Guadalajara,Aguascalientes,1
+Guadalajara,Morelia,1
+Guadalajara,Guanajuato,1
+Ciudad Victoria,Xalapa,1
+Ciudad Victoria,Monterrey,1
+Guanajuato,Queretaro,1
+Guanajuato,Morelia,1
+Colima,Morelia,1
+Morelia,Colima,1
+Morelia,Toluca,1
+Morelia,Chilpancingo,1
+Queretaro,Pachuca,1
+Queretaro,Toluca,1
+Xalapa,Villahermosa,1
+Xalapa,Tuxla,1
+Xalapa,Oaxaca,1
+Xalapa,Puebla,1
+Toluca,Pachuca,1
+Toluca,Tlaxcala,1
+Toluca,Cuernavaca,1
+Toluca,CDMX,1
+Toluca,Puebla,1
+Chilpancingo,Cuernavaca,1
+Chilpancingo,Puebla,1
+Chilpancingo,Oaxaca,1
+Tlaxcala,Pachuca,1
+Tlaxcala,Puebla,1
+CDMX,Toluca,1
+CDMX,Cuernavaca,1
+Puebla,Oaxaca,1
+Puebla,Cuernavaca,1
+Oaxaca,Tutxla,1
+Tutxla,Villahermosa,1
+Villahermosa,Campeche,1
+Campeche,Merida,1
+Merida,Chetumal,1
+Chetumal,Campeche,1
+Pachuca,Tlaxcala,1
+Pachuca,Xalapa,1
+Pachuca,Puebla,1

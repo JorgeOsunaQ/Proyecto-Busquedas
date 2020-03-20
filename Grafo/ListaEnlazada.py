@@ -57,7 +57,7 @@ class ListaEnlazada:
             return False
 
         if(self.size()==1):
-            return self.removeFirst()
+            return self.remove_first()
 
         actual=self.__inicio
         anterior=None
@@ -78,10 +78,10 @@ class ListaEnlazada:
             return False
 
         if(elem==self.__inicio.element):
-            return self.removeFirst()
+            return self.remove_first()
         
         if(elem==self.__fin.element):
-            return self.removeLast()
+            return self.remove_last()
 
         actual=self.__inicio
         anterior=None
@@ -118,8 +118,3 @@ class ListaEnlazada:
 
     inicio=property(get_inicio)
     fin=property(get_fin)
-
-li=[2,4,5,3,2]
-#li.pop(0)
-li.append(6)
-print(li.pop(0))
