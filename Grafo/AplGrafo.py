@@ -20,4 +20,4 @@ if __name__ == "__main__":
     apl=AplGrafoCiudades()
     apl.agrega_ciudades()
     apl.agrega_colindantes()
-    apl.grafo.breadth_first_search('Culiacán','sd')
+    apl.grafo.breadth_first_search('Culiacán','Chetumal')

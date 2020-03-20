@@ -75,7 +75,7 @@ class Grafo:
             for value in iterador:
                 vecino=value['neighboor']
                 #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
-                if(vecino not in abiertos):
+                if((vecino not in abiertos) and (vecino not in cerrados)):
                     abiertos.append(vecino)
         return False
 
