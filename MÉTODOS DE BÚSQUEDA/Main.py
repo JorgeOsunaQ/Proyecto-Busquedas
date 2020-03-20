@@ -78,5 +78,16 @@ Chetumal,Tlaxcala,Puebla,Tuxla]
 #CREACIÓN LIST CIUDADES
 ciudades = Ciudades(listCiudades)
 
-ciudades.__trazarRutaProfundidad__('Culiacan','Tepic')
-ciudades.__trazarRutaAmplitud__('Culiacan','Tepic')
+opcion = -1
+while opcion != 3:
+    print('\n--MENU--')
+    print('1.- TRAZAR RUTA POR AMPLITUD\n2.- TRAZAR RUTA POR PROFUNDIDAD\n3.- SALIR')
+    opcion = int(input())
+    print('ORIGEN: ')
+    origen = input()
+    print('DESTINO: ')
+    destino = input()
+    if opcion == 1:
+        ciudades.__trazarRutaAmplitud__(origen,destino)
+    if opcion == 2:
+        ciudades.__trazarRutaProfundidad__(origen,destino)
