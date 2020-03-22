@@ -79,6 +79,51 @@ class Grafo:
                     abiertos.append(vecino)
         return False
 
+    #Algoritmo para trazar busqueda en profundidad
+    def Depth_First_Search(self,src,dst):
+        #Verificar que la lista de vertices no se encuentre vacía 
+        if(self.__vertices.is_empty()):
+            return 0
+        #Verificar que el vertice meta no sea igual al vertice de salida
+        if(src==dst):
+            return 1
+        #Obtenemos los vertices de salida y meta
+        source=self.search_vertice(src)
+        dest=self.search_vertice(dst)
+        #Verificamos que ambos existan en el grafo
+        if((not dest) or (not source)):
+            return 2
+        #Cola de vertices abiertos (Agregamos el vertice de salida al inicio)
+        abiertos=[]
+        abiertos.append(source)
+        #Cola de vertices cerrados
+        cerrados=[]
+        #Mientras la cola de abiertos no esté vacía
+        while(len(abiertos)!=0):
+            #Esto es unicamente una prueba de la busqueda en amplitud:
+            print('\nABIERTOS:')
+            for i in abiertos:
+                print(i.etiqueta)
+            print('\nCERRADOS')
+            for i in cerrados:
+                print(i.etiqueta)
+            #Removemos el primer elemento de la cola de abiertos
+            temp=abiertos.pop(0)
+            #Si es igual al vertice de destino entonces se encontró la ruta
+            if(temp==dest):
+                return True
+            #Si no está en la cola de cerrados entonces lo agregamos
+            if(temp not in cerrados):
+                cerrados.append(temp)
+            #Obtenemos los descendientes inmediatos del vertice
+            iterador=temp.adyacencias.iterator()
+            for value in iterador:
+                vecino=value['neighboor']
+                #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
+                if((vecino not in abiertos) and (vecino not in cerrados)):
+                    abiertos.insert(0,vecino)
+        return False
+
     def __str__(self):
         temp=''
         if(self.__vertices.is_empty()):
@@ -94,3 +139,4 @@ class Grafo:
     
     vertices=property(get_vertices)
 Grafo()
+
