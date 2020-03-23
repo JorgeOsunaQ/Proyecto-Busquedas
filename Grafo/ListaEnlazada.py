@@ -116,5 +116,12 @@ class ListaEnlazada:
     def size(self):
         return self.__count
 
+    def __str__(self):
+        iterador=self.iterator()
+        temp=''
+        while(iterador.has_next()):
+            temp+=str(next(iterador))+'\n'
+        return temp
+
     inicio=property(get_inicio)
     fin=property(get_fin)

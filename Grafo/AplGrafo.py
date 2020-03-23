@@ -7,6 +7,7 @@ class AplGrafoCiudades:
         #Falta manejo de excepciones (en todo el código)
         self.df_ciudades=pd.read_csv('Grafo\CSV\ciudades.csv')
         self.df_aristas=pd.read_csv('Grafo\CSV\conexiones.csv')
+        pd.set_option('display.max_rows', None)
 
     def agrega_ciudades(self):
         for ciudad in self.df_ciudades['Ciudad']:
@@ -20,6 +21,5 @@ if __name__ == "__main__":
     apl=AplGrafoCiudades()
     apl.agrega_ciudades()
     apl.agrega_colindantes()
-    #apl.grafo.breadth_first_search('Culiacán','Saltillo')
-    apl.grafo.Depth_First_Search('Culiacán','Saltillo')
-
+    #apl.grafo.breadth_first_search('Culiacán','CDMX')
+    apl.grafo.Depth_First_Search('Culiacán','CDMX')

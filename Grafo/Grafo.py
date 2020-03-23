@@ -56,12 +56,14 @@ class Grafo:
         #Mientras la cola de abiertos no esté vacía
         while(len(abiertos)!=0):
             #Esto es unicamente una prueba de la busqueda en amplitud:
+            print('------------')
             print('\nABIERTOS:')
             for i in abiertos:
                 print(i.etiqueta)
             print('\nCERRADOS')
             for i in cerrados:
                 print(i.etiqueta)
+            print('------------')
             #Removemos el primer elemento de la cola de abiertos
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
@@ -117,11 +119,14 @@ class Grafo:
                 cerrados.append(temp)
             #Obtenemos los descendientes inmediatos del vertice
             iterador=temp.adyacencias.iterator()
+            listTemp=[]
             for value in iterador:
                 vecino=value['neighboor']
                 #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
                 if((vecino not in abiertos) and (vecino not in cerrados)):
-                    abiertos.insert(0,vecino)
+                    listTemp.append(vecino)
+            abiertos=listTemp+abiertos
+
         return False
 
     def __str__(self):
@@ -138,5 +143,3 @@ class Grafo:
         return self.__vertices
     
     vertices=property(get_vertices)
-Grafo()
-
