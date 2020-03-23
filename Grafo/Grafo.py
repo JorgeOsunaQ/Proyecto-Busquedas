@@ -116,7 +116,7 @@ class Grafo:
                 return True
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
-                cerrados.append(temp)
+                cerrados.insert(0,temp)
             #Obtenemos los descendientes inmediatos del vertice
             iterador=temp.adyacencias.iterator()
             listTemp=[]
