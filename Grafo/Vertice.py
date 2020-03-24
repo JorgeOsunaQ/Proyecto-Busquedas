@@ -39,7 +39,7 @@ class Vertice:
                 verticeActual=next(iterador)
                 nomVecino=verticeActual['neighboor'].__etiqueta
                 pesoVecino=verticeActual['weight']
-                temp+=f'Vecino: {nomVecino}, Distancia:{pesoVecino}-> '
+                temp+=f'Vecino: {nomVecino}, Distancia:{pesoVecino} km-> '
         return temp
 
     etiqueta=property(get_etiqueta)

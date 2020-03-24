@@ -1,68 +1,68 @@
-Src,Dest,Distancia
-Culiacán,Tepic,1
-Culiacán,Durango,1
-Culiacán,Chihuahua,1
-Culiacán,Hermosillo,1
-Mexicali,Hermosillo,1
-La Paz,Mexicali,1
-Hermosillo,Chihuahua,1
-Chihuahua,Saltillo,1
-Chihuahua,Durango,1
-Saltillo,Durango,1
-Saltillo,Zacatecas,1
-Saltillo,Monterrey,1
-Durango,Zacatecas,1
-Durango,Tepic,1
-Monterrey,Zacatecas,1
-Monterrey,San Luis Potosi,1
-Tepic,Zacatecas,1
-Tepic,Guadalajara,1
-Zacatecas,San Luis Potosi,1
-Zacatecas,Aguascalientes,1
-San Luis Potosi,Ciudad Victoria,1
-San Luis Potosi,Pachuca,1
-San Luis Potosi,Queretaro,1
-San Luis Potosi,Guadalajara,1
-San Luis Potosi,Guanajuato,1
-San Luis Potosi,Xalapa,1
-Guadalajara,Colima,1
-Guadalajara,Aguascalientes,1
-Guadalajara,Morelia,1
-Guadalajara,Guanajuato,1
-Ciudad Victoria,Xalapa,1
-Ciudad Victoria,Monterrey,1
-Guanajuato,Queretaro,1
-Guanajuato,Morelia,1
-Colima,Morelia,1
-Morelia,Colima,1
-Morelia,Toluca,1
-Morelia,Chilpancingo,1
-Queretaro,Pachuca,1
-Queretaro,Toluca,1
-Xalapa,Villahermosa,1
-Xalapa,Tuxla,1
-Xalapa,Oaxaca,1
-Xalapa,Puebla,1
-Toluca,Pachuca,1
-Toluca,Tlaxcala,1
-Toluca,Cuernavaca,1
-Toluca,CDMX,1
-Toluca,Puebla,1
-Chilpancingo,Cuernavaca,1
-Chilpancingo,Puebla,1
-Chilpancingo,Oaxaca,1
-Tlaxcala,Pachuca,1
-Tlaxcala,Puebla,1
-CDMX,Toluca,1
-CDMX,Cuernavaca,1
-Puebla,Oaxaca,1
-Puebla,Cuernavaca,1
-Oaxaca,Tutxla,1
-Tutxla,Villahermosa,1
-Villahermosa,Campeche,1
-Campeche,Merida,1
-Merida,Chetumal,1
-Chetumal,Campeche,1
-Pachuca,Tlaxcala,1
-Pachuca,Xalapa,1
-Pachuca,Puebla,1
+Src,Dest,Distancia(KM),
+Culiacán,Tepic,482,
+Culiacán,Durango,475,
+Culiacán,Chihuahua,1066,
+Culiacán,Hermosillo,690,
+Mexicali,Hermosillo,697,
+La Paz,Mexicali,1356,
+Hermosillo,Chihuahua,890,
+Chihuahua,Saltillo,728,
+Chihuahua,Durango,683,
+Saltillo,Durango,506,
+Saltillo,Zacatecas,383,
+Saltillo,Monterrey,87,
+Durango,Zacatecas,289,
+Durango,Tepic,468,
+Monterrey,Zacatecas,493,
+Monterrey,San Luis Potosi,515,
+Tepic,Guadalajara,208,
+Tepic,Zacatecas,543,
+Zacatecas,San Luis Potosi,193,
+Zacatecas,Aguascalientes,121,
+San Luis Potosi,Ciudad Victoria,323,
+San Luis Potosi,Pachuca,429,
+San Luis Potosi,Queretaro,213,
+San Luis Potosi,Guadalajara,329,
+San Luis Potosi,Guanajuato,190,
+San Luis Potosi,Xalapa,665,
+Guadalajara,Colima,195,
+Guadalajara,Aguascalientes,221,
+Guadalajara,Morelia,288,
+Guadalajara,Guanajuato,275,
+Ciudad Victoria,Xalapa,799,
+Ciudad Victoria,Monterrey,667,
+Guanajuato,Queretaro,149,
+Guanajuato,Morelia,175,
+Colima,Morelia,477,
+Morelia,Colima,477,
+Morelia,Toluca,236,
+Morelia,Chilpancingo,558,
+Queretaro,Pachuca,224,
+Queretaro,Toluca,199,
+Xalapa,Villahermosa,566,
+Xalapa,Tuxla,649,
+Xalapa,Oaxaca,425,
+Xalapa,Puebla,174,
+Toluca,Pachuca,153,
+Toluca,Tlaxcala,180,
+Toluca,Cuernavaca,136,
+Toluca,CDMX,64,
+Toluca,Puebla,191,
+Chilpancingo,Cuernavaca,187,
+Chilpancingo,Puebla,280,
+Chilpancingo,Oaxaca,621,
+Tlaxcala,Pachuca,126,
+Tlaxcala,Puebla,37,
+CDMX,Toluca,64,
+CDMX,Cuernavaca,87,
+Puebla,Oaxaca,340,
+Puebla,Cuernavaca,149,
+Oaxaca,Tutxla,564,
+Tutxla,Villahermosa,247,
+Villahermosa,Campeche,382,
+Campeche,Merida,179,
+Merida,Chetumal,383,
+Chetumal,Campeche,417,
+Pachuca,Tlaxcala,125,
+Pachuca,Xalapa,278,
+Pachuca,Puebla,145,
