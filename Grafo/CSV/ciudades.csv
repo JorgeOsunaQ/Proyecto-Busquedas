@@ -1,33 +1,33 @@
-Ciudad
-Culiacán
-La Paz
-Mexicali
-Durango
-Hermosillo
-Chihuahua
-Saltillo
-Zacatecas
-Tepic
-Monterrey
-Ciudad Victoria
-San Luis Potosi
-Aguascalientes
-Guadalajara
-Colima
-Guanajuato
-Queretaro
-Morelia
-Chilpancingo
-Pachuca
-Cuernavaca
-Toluca
-CDMX
-Xalapa
-Oaxaca
-Villahermosa
-Campeche
-Merida
-Chetumal
-Tlaxcala
-Puebla
-Tuxla
+Ciudad,Latitud,Longitud
+Culiacán,24.808639,-107.394450
+La Paz,24.142547,-110.312854
+Mexicali,32.624554,-115.452667
+Durango,24.027563,-104.653086
+Hermosillo,29.072926,-110.955944
+Chihuahua,28.628603,-106.073319
+Saltillo,25.438193,-100.973718
+Zacatecas,22.770799,-102.583294
+Tepic,21.504131,-104.894604
+Monterrey,25.686192,-100.316684
+Ciudad Victoria,23.736996,-99.141179
+San Luis Potosi,22.156436,-100.985160
+Aguascalientes,21.885267,-102.291486
+Guadalajara,20.659536,-103.350096
+Colima,19.245196,-103.724094
+Guanajuato,21.018658,-101.256684
+Queretaro,20.588898,-100.389910
+Morelia,19.705743,-101.194930
+Chilpancingo,17.551430,-99.500543
+Pachuca,20.101019,-98.759152
+Cuernavaca,18.924206,-99.221523
+Toluca,19.282625,-99.655552
+CDMX,19.432666,-99.132878
+Xalapa,19.543390,-96.910153
+Oaxaca,17.073207,-96.726514
+Villahermosa,17.989862,-92.947197
+Campeche,19.830236,-90.534879
+Merida,20.967363,-89.592386
+Chetumal,18.500135,-88.296213
+Tlaxcala,19.313924,-98.240439
+Puebla,19.041448,-98.206304
+Tuxtla,16.750586,-93.109712

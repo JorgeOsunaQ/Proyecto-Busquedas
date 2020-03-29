@@ -1,17 +1,16 @@
-from Grafo import Grafo
+from GrafoCiudades import GrafoCiudades
 import pandas as pd 
 class AplGrafoCiudades:
 
     def __init__(self):
-        self.grafo=Grafo()
+        self.grafo=GrafoCiudades()
         #Falta manejo de excepciones (en todo el código)
         self.df_ciudades=pd.read_csv('Grafo\CSV\ciudades.csv')
         self.df_aristas=pd.read_csv('Grafo\CSV\conexiones.csv')
-        pd.set_option('display.max_rows', None)
 
     def agrega_ciudades(self):
-        for ciudad in self.df_ciudades['Ciudad']:
-            self.grafo.add_vertice(ciudad)
+        for index,ciudad in self.df_ciudades.iterrows():
+            self.grafo.add_ciudad(ciudad['Ciudad'],ciudad['Latitud'],ciudad['Longitud'])
 
     def agrega_colindantes(self):
         for index, arista in self.df_aristas.iterrows():

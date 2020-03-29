@@ -3,12 +3,12 @@ from Vertice import Vertice
 class Grafo:
 
     def __init__(self):
-        self.__vertices=ListaEnlazada()
+        self.vertices=ListaEnlazada()
     
     def add_vertice(self,etiqueta):
         vertice=self.search_vertice(etiqueta)
         if(not vertice):
-            self.__vertices.add_to_rear(Vertice(etiqueta))
+            self.vertices.add_to_rear(Vertice(etiqueta))
 
     def add_arista(self, src,dst,peso=1):
         source=self.search_vertice(src)
@@ -25,7 +25,7 @@ class Grafo:
         return 3
 
     def search_vertice(self,etiqueta):
-        iterador=self.__vertices.iterator()
+        iterador=self.vertices.iterator()
 
         while(iterador.has_next()):
             actual=next(iterador)
@@ -37,7 +37,7 @@ class Grafo:
     #Algoritmo para trazar busqueda en amplitud
     def breadth_first_search(self,src,dst):
         #Verificar que la lista de vertices no se encuentre vacía 
-        if(self.__vertices.is_empty()):
+        if(self.vertices.is_empty()):
             return 0
         #Verificar que el vertice meta no sea igual al vertice de salida
         if(src==dst):
@@ -84,7 +84,7 @@ class Grafo:
     #Algoritmo para trazar busqueda en profundidad
     def Depth_First_Search(self,src,dst):
         #Verificar que la lista de vertices no se encuentre vacía 
-        if(self.__vertices.is_empty()):
+        if(self.vertices.is_empty()):
             return 0
         #Verificar que el vertice meta no sea igual al vertice de salida
         if(src==dst):
@@ -131,15 +131,10 @@ class Grafo:
 
     def __str__(self):
         temp=''
-        if(self.__vertices.is_empty()):
+        if(self.vertices.is_empty()):
             return'Sin Vertices'
 
-        iterador=self.__vertices.iterator()
+        iterador=self.vertices.iterator()
         while(iterador.has_next()):
             temp+=str(next(iterador))+'\n'
         return temp
-
-    def get_vertices(self):
-        return self.__vertices
-    
-    vertices=property(get_vertices)
