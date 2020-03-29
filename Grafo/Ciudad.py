@@ -14,3 +14,5 @@ class Ciudad(Vertice):
     
     latitud=property(get_latitud)
     longitud=property(get_longitud)
+
+    

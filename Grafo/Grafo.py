@@ -35,20 +35,7 @@ class Grafo:
         return False
 
     #Algoritmo para trazar busqueda en amplitud
-    def breadth_first_search(self,src,dst):
-        #Verificar que la lista de vertices no se encuentre vacía 
-        if(self.vertices.is_empty()):
-            return 0
-        #Verificar que el vertice meta no sea igual al vertice de salida
-        if(src==dst):
-            return 1
-        #Obtenemos los vertices de salida y meta
-        source=self.search_vertice(src)
-        dest=self.search_vertice(dst)
-        #Verificamos que ambos existan en el grafo
-        if((not dest) or (not source)):
-            return 2
-        #Cola de vertices abiertos (Agregamos el vertice de salida al inicio)
+    def breadth_first_search(self,source,dest):
         abiertos=[]
         abiertos.append(source)
         #Cola de vertices cerrados
@@ -68,7 +55,8 @@ class Grafo:
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
             if(temp==dest):
-                return True
+                cerrados.append(temp)
+                return cerrados
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
                 cerrados.append(temp)
@@ -82,19 +70,7 @@ class Grafo:
         return False
 
     #Algoritmo para trazar busqueda en profundidad
-    def Depth_First_Search(self,src,dst):
-        #Verificar que la lista de vertices no se encuentre vacía 
-        if(self.vertices.is_empty()):
-            return 0
-        #Verificar que el vertice meta no sea igual al vertice de salida
-        if(src==dst):
-            return 1
-        #Obtenemos los vertices de salida y meta
-        source=self.search_vertice(src)
-        dest=self.search_vertice(dst)
-        #Verificamos que ambos existan en el grafo
-        if((not dest) or (not source)):
-            return 2
+    def depth_first_search(self,source,dest):
         #Cola de vertices abiertos (Agregamos el vertice de salida al inicio)
         abiertos=[]
         abiertos.append(source)
@@ -102,18 +78,23 @@ class Grafo:
         cerrados=[]
         #Mientras la cola de abiertos no esté vacía
         while(len(abiertos)!=0):
-            #Esto es unicamente una prueba de la busqueda en amplitud:
+            
+            #Esto es unicamente una prueba de la busqueda en profundidad:
+            print('------------')
             print('\nABIERTOS:')
             for i in abiertos:
                 print(i.etiqueta)
             print('\nCERRADOS')
             for i in cerrados:
                 print(i.etiqueta)
-            #Removemos el primer elemento de la cola de abiertos
+            print('------------')
+            
+            #Removemos el primer elemento de la pila de abiertos
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
             if(temp==dest):
-                return True
+                cerrados.insert(0,temp)
+                return cerrados
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
                 cerrados.insert(0,temp)
@@ -122,11 +103,10 @@ class Grafo:
             listTemp=[]
             for value in iterador:
                 vecino=value['neighboor']
-                #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
+                #Si el vertice no ha sido abierto aún se agrega a la pila de abiertos
                 if((vecino not in abiertos) and (vecino not in cerrados)):
                     listTemp.append(vecino)
             abiertos=listTemp+abiertos
-
         return False
 
     def __str__(self):
