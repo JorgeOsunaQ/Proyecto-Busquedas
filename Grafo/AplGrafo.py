@@ -89,4 +89,7 @@ if __name__ == "__main__":
     apl=AplGrafoCiudades()
     apl.agrega_ciudades()
     apl.agrega_colindantes()
-    menu(apl)
+    menu(apl)  
+    #apl.grafo.breadth_first_search('Culiacán','CDMX')
+    #apl.grafo.Depth_First_Search('Culiacán','Monterrey')
+
