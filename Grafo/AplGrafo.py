@@ -81,6 +81,9 @@ def busquedas(grafo):
             elif(res==3):
                 print('----Busqueda Best First----')
                 grafo.best_first_search(source,dest)
+            elif(res==4):
+                print('----Busqueda Branch and Bound----')
+                grafo.branch_and_bound_search(source,dest)
 
         except ValueError:
             print('\nError: Ingrese un valor entero')
