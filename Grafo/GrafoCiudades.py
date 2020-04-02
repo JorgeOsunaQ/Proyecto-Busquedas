@@ -49,11 +49,12 @@ class GrafoCiudades(Grafo):
 
             for value in iterador:
                 vecino=value['neighboor']
-
+                #Obtenemos la estimación heuristica o distancia restante del vertice al nodo meta
                 vecino=(vecino,self.heuristics(vecino,dest))
                 #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
                 if(not any(filter(lambda x: x[0]==vecino,abiertos)) and (vecino not in cerrados)):
                     #Obtenemos la estimación heuristica o distancia restante del vertice al nodo meta
+                    vecino=(vecino,self.heuristics(vecino,dest))
                     abiertos.append(vecino)
             abiertos.sort(key=itemgetter(1))
         return False
