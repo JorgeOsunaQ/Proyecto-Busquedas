@@ -84,6 +84,9 @@ def busquedas(grafo):
             elif(res==4):
                 print('----Busqueda Branch and Bound----')
                 grafo.branch_and_bound_search(source,dest)
+            elif(res==5):
+                print('----Busqueda A star----')
+                grafo.A_star_search(source,dest)
 
         except ValueError:
             print('\nError: Ingrese un valor entero')

@@ -102,7 +102,51 @@ class GrafoCiudades(Grafo):
             abiertos.sort(key=itemgetter(1))
         return False
 
+    def A_star_search(self,source,dest):
+        abiertos=[]
+        cerrados=[]
+        actual=source
+        actual.set_f(0+self.heuristics(source,dest))
+        while(actual != dest):
+            iterador=actual.adyacencias.iterator()
+            for value in iterador:
+                temp=value['neighboor']
+                if ((temp not in abiertos) and (temp not in cerrados)):
+                    abiertos.append(temp)
+                    cerrados.append(actual)
+                    gPadre=actual.get_g()
+                    gtemp=value['weight']
+                    g=gPadre+gtemp
+                    f=g+self.heuristics(temp,dest)
+                    if ((temp.get_f()==0) or (f<temp.get_f())):
+                        temp.set_f(f)
+                        temp.set_g(g)
+                        temp.set_parent(actual)
+            menor=999999999
+            indice=0
+            c=0
+            for i in abiertos:
+                if (i.get_f()<menor):
+                    menor=i.get_f()
+                    indice=c
+                    c+=1
+            actual=abiertos.pop(indice)
+        self.previos(actual)
+        return
+
     def heuristics(self,node,goal):
         coor1=(node.latitud,node.longitud)
         coor2=(goal.latitud,goal.longitud)
         return round(Rutinas.haversine_function(coor1,coor2),2)
+
+    def previos(self,dest):
+        if (dest==None):
+            return
+        
+        self.previos(dest.parent)
+
+        print (str(dest.etiqueta))
+        print ('G:'+str(dest.g)+' F:'+str(dest.f)+' H:'+str(dest.f-dest.g))
+        dest.set_g(0)
+        dest.set_f(0)
+        dest.set_parent(None)
