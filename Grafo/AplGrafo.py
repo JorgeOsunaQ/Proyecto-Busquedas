@@ -36,7 +36,6 @@ def menu(apl):
                 elif(op==2):
                     print('Alguna de las ciudades no existe en el grafo. Inténtelo nuevamente.')
             elif(res==2):
-                print('wep')
                 print(apl.grafo)
             elif(res==3):
                 print('Programa Finalizado')
@@ -63,6 +62,7 @@ def busquedas(grafo):
 
     while(res!=6):
         try:
+            path=None
             print('\nIngrese la operación a realizar')
             print('1.-Busqueda en amplitud')
             print('2.-Busqueda en profundidad')
@@ -74,20 +74,24 @@ def busquedas(grafo):
                 
             if(res==1):
                 print('----Busqueda en amplitud----')
-                grafo.breadth_first_search(source,dest)
+                path=grafo.breadth_first_search(source,dest)
             elif(res==2):
                 print('----Busqueda en profundidad----')
-                grafo.depth_first_search(source,dest)
+                path=grafo.depth_first_search(source,dest)
             elif(res==3):
                 print('----Busqueda Best First----')
-                grafo.best_first_search(source,dest)
+                path=grafo.best_first_search(source,dest)
             elif(res==4):
                 print('----Busqueda Branch and Bound----')
-                grafo.branch_and_bound_search(source,dest)
+                path=grafo.branch_and_bound_search(source,dest)
             elif(res==5):
                 print('----Busqueda A star----')
-                grafo.A_star_search(source,dest)
-
+                path=grafo.A_star_search(source,dest)
+            if(path!=None and path):
+                path_res=''
+                for x in path:
+                    path_res+=x.etiqueta+'->'
+                print('\nCamino encontrado: '+path_res)
         except ValueError:
             print('\nError: Ingrese un valor entero')
 
@@ -98,4 +102,3 @@ if __name__ == "__main__":
     menu(apl)  
     #apl.grafo.breadth_first_search('Culiacán','CDMX')
     #apl.grafo.Depth_First_Search('Culiacán','Monterrey')
-

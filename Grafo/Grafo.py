@@ -118,3 +118,9 @@ class Grafo:
         while(iterador.has_next()):
             temp+=str(next(iterador))+'\n'
         return temp
+
+    @classmethod
+    def order_by_f(cls,vertice):
+        if(isinstance(vertice,Vertice)):
+            return vertice.get_f()
+            
