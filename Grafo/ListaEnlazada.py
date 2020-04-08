@@ -8,6 +8,9 @@ class ListaEnlazada:
         self.__fin=None
         self.__count=0
 
+    def __iter__(self):
+        return ListaIterador(self.__inicio)
+
     def get_inicio(self):
         return self.__inicio
 
@@ -39,6 +42,21 @@ class ListaEnlazada:
             self.__fin=nuevo
         self.__count+=1
         return True
+
+    def add_after(self,elemento,previo):
+        if(not self.contains(previo)):
+            return False
+
+        actual=self.__inicio
+        while(actual!=None):
+            if(previo==actual.element):
+                break
+            actual=actual.next
+        nuevo=Nodo(elemento)
+        nuevo.next=actual.next
+        actual.next=nuevo
+        self.__count+=1
+
 
     def add_sorted(self,elemento):
         pass
@@ -93,7 +111,7 @@ class ListaEnlazada:
         temp=actual.element
         anterior.next=actual.next
 
-        self.__count+=-1
+        self.__count-=1
         return temp
         
     def contains(self, elem):
@@ -101,14 +119,10 @@ class ListaEnlazada:
         if(self.is_empty()):
             return False
         
-        iterador=self.iterator()
-
+        iterador=iter(self)
         while(iterador.has_next()):
             if(elem is next(iterador)):
                 return True
-
-    def iterator(self):
-        return iter(ListaIterador(self.__inicio))
 
     def is_empty(self):
         return self.__count==0
@@ -117,7 +131,7 @@ class ListaEnlazada:
         return self.__count
 
     def __str__(self):
-        iterador=self.iterator()
+        iterador=iter(self)
         temp=''
         while(iterador.has_next()):
             temp+=str(next(iterador))+'\n'

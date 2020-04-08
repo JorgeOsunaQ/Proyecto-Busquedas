@@ -19,7 +19,7 @@ class Vertice:
         if self.adyacencias.is_empty() or vertice==self:
             return False
 
-        iterador=self.adyacencias.iterator()
+        iterador=iter(self.adyacencias)
         while(iterador.has_next()):
             if(next(iterador)['neighboor']==vertice):
                 return True
@@ -31,7 +31,7 @@ class Vertice:
         if(self.adyacencias.is_empty()):
             temp+='Vertice Aislado'
         else:
-            iterador=self.adyacencias.iterator()
+            iterador=iter(adyacencias)
             while(iterador.has_next()):
                 verticeActual=next(iterador)
                 nomVecino=verticeActual['neighboor'].etiqueta

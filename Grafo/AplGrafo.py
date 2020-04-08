@@ -91,7 +91,8 @@ def busquedas(grafo):
                 path_res=''
                 for x in path:
                     path_res+=x.etiqueta+'->'
-                print('\nCamino encontrado: '+path_res)
+                print('\nCamino encontrado: '+path_res)            
+                
         except ValueError:
             print('\nError: Ingrese un valor entero')
 
@@ -101,4 +102,4 @@ if __name__ == "__main__":
     apl.agrega_colindantes()
     menu(apl)  
     #apl.grafo.breadth_first_search('Culiacán','CDMX')
-    #apl.grafo.Depth_First_Search('Culiacán','Monterrey')
+    #apl.grafo.Depth_First_Search('Culiacán','Monterrey')11
