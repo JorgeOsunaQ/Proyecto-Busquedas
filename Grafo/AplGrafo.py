@@ -15,7 +15,8 @@ class AplGrafoCiudades:
     def agrega_colindantes(self):
         for index, arista in self.df_aristas.iterrows():
             self.grafo.add_arista(arista['Src'],arista['Dest'],arista['Distancia(KM)'])
-
+    def getGrafo(self):
+        return self.grafo.__str__()
 def menu(apl):
     res=-1
 

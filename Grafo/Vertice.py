@@ -31,12 +31,12 @@ class Vertice:
         if(self.adyacencias.is_empty()):
             temp+='Vertice Aislado'
         else:
-            iterador=iter(adyacencias)
+            iterador=iter(self.adyacencias)
             while(iterador.has_next()):
                 verticeActual=next(iterador)
                 nomVecino=verticeActual['neighboor'].etiqueta
                 pesoVecino=verticeActual['weight']
-                temp+=f'Vecino: {nomVecino}, Distancia:{pesoVecino} km-> '
+                temp+=f'{nomVecino}({pesoVecino} km)->  '
         return temp
 
     def get_g(self): 

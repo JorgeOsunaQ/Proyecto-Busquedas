@@ -159,7 +159,7 @@ class Grafo:
 
         iterador=iter(self.vertices)
         while(iterador.has_next()):
-            temp+=str(next(iterador))+'\n'
+            temp+=str(next(iterador))+'\n\n'
         return temp
 
     @classmethod
