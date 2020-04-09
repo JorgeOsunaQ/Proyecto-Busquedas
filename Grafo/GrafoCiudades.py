@@ -1,7 +1,6 @@
 from Grafo import Grafo
 from Ciudad import Ciudad
 from operator import itemgetter
-from Rutinas import Rutinas
 
 
 class GrafoCiudades(Grafo): 
@@ -15,30 +14,26 @@ class GrafoCiudades(Grafo):
     
     def best_first_search(self,source,dest):
         #Cola de vertices abiertos
-        abiertos=[]
-        first=(source, GrafoCiudades.heuristics(source,dest))
-        abiertos.append(first)
+        source.f=GrafoCiudades.heuristics(source,dest)
+        abiertos=[source]
         #Cola de vertices cerrados
         cerrados=[]
+        iteraciones=''
+        count=0
         while(len(abiertos)!=0):
-
-            #Esto es unicamente una prueba de la Best-First Search
-            print('------------')
-            print('\nABIERTOS:')
-            for i in abiertos:
-                print(f'{i[0].etiqueta} {i[1]}')
-            print('\nCERRADOS')
-            for i in cerrados:
-                print(i.etiqueta)
-            print('------------')
+            count+=1
+            #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
 
             #Removemos el primer elemento de la cola de abiertos
-            temp=abiertos.pop(0)[0]
+            temp=abiertos.pop(0)
 
             #Si es igual al vertice de destino entonces se encontró la ruta
             if(temp==dest):
                 cerrados.append(temp)
-                return cerrados
+                Grafo.set_default_values(abiertos)
+                Grafo.set_default_values(cerrados)
+                return cerrados,iteraciones
 
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
@@ -50,12 +45,14 @@ class GrafoCiudades(Grafo):
             for value in iterador:
                 vecino=value['neighboor']
                 #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
-                if(not any(filter(lambda x: x[0]==vecino,abiertos)) and (vecino not in cerrados)):
-                    #Obtenemos la estimación heuristica o distancia restante del vertice al nodo meta
-                    vecino=(vecino,GrafoCiudades.heuristics(vecino,dest))
+                if((vecino not in abiertos) and (vecino not in cerrados)):
+                    '''Asignamos la estimación heuristica al vértice de acuerdo
+                     al algoritmo best-first search, donde el costo total del camino es f(n)=h(n)
+                    '''
+                    vecino.f=Grafo.heuristics(vecino,dest)
                     abiertos.append(vecino)
-            abiertos.sort(key=itemgetter(1))
-        return False
+            abiertos.sort(key=lambda x: x.f)
+        return False,iteraciones
 
     def A_star_search(self,source,dest):
         #Lista de nodos por visitar
@@ -66,8 +63,10 @@ class GrafoCiudades(Grafo):
         actual=source
         #Inicializamos el valor del costo total f(n) de acuerdo al algoritmo A*
         actual.set_f(0+GrafoCiudades.heuristics(source,dest))
-
+        count=0
+        iteraciones=''
         while(actual != dest):
+            count+=1
             iterador=iter(actual.adyacencias)          
             #Iteramos sobre los vértices adyacentes del nodo "actual"
             for value in iterador:
@@ -84,27 +83,24 @@ class GrafoCiudades(Grafo):
                     #Determinamos g(n) con la suma de ambas distancias recorridas
                     g=gPadre+gvecino
                     #Establecemos el costo total del camino f(n)=g(n)+h(n) de acuerdo al algoritmo A*
-                    f=g+GrafoCiudades.heuristics(vecino,dest)
+                    f=g+Grafo.heuristics(vecino,dest)
                     #Si el costo total del camino recorrido por el nodo es igual a cero o menor al costo total calculado
                     if ((vecino.get_f()==0) or (f<vecino.get_f())):
                         #Se agregan los valores de f(n) y g(n) al vértice
                         vecino.set_f(f)
                         vecino.set_g(g)
                         #Fijamos el "padre" del vértice como una referencia al nodo actual
-                        vecino.set_parent(actual)
+                        vecino.set_come_from(actual)
             #Agregamos al vértice actual a la lista de visitados
             cerrados.append(actual)
             #Ordenamos la lista de visitados de acuerdo al costo total f(n) de los vértices
             abiertos.sort(key=Grafo.sort_by_f)
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+
             #actual=abiertos.pop(indice)
             actual=abiertos.pop(0)
         path=[]
         GrafoCiudades.reconstruct_path(actual,path)
+        Grafo.set_default_values(abiertos)
         Grafo.set_default_values(cerrados) 
-        return path
-
-    @classmethod
-    def heuristics(cls,node,goal):
-        coor1=(node.latitud,node.longitud)
-        coor2=(goal.latitud,goal.longitud)
-        return round(Rutinas.haversine_function(coor1,coor2),2)
+        return path,iteraciones;

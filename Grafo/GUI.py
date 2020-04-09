@@ -1,6 +1,5 @@
 #------ DEPENDECIAS --------#
 from tkinter import *
-import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk,Image
 from AplGrafo import AplGrafoCiudades
@@ -9,7 +8,9 @@ import tkinter.messagebox
 #------ VARIABLES GLOBALES ------------#
 origen =" "
 destino =" "
+#¡NO!
 capitales=["Culiacán","La paz","Mexicali","Durango","Hermosillo","Chihuahua","Saltillo","Zacatecas","Tepic","Monterrey","Ciudad Victoria","San Luis Potosi","Aguascalientes","Guadalajara","Colima", "Guanajuato","Queretaro","Morelia","Chilpancingo", "Pachuca","Cuarnavaca","Toluca","CDMX", "Xalapa","Villahermosa","Campeche", "Merida", "Chetumal", "Tlaxcala", "Puebla", "Tuxla"]
+#capitales=
 
 #------DEFINICIÓN DEL GRAFO----------#
 apl=AplGrafoCiudades()
@@ -36,8 +37,8 @@ def showFrameGrafo(grafo):
     scrollbar = Scrollbar(ventana, command=textArea.yview)
     scrollbar.grid(row="4", column="2", sticky="nsew")
     scrollbar.place(x="1280", y="190")
-    textArea.config(state="normal")
-    textArea.insert(tk.INSERT,grafo)
+    textArea.insert(INSERT,grafo)
+    textArea.config(state="disabled")
     ventana.mainloop()
 
 def showFrameSearchs():
@@ -101,6 +102,7 @@ menuSearch=Menu(menu, tearoff=False)
 menuCities=Menu(menu, tearoff=False)
 menuExit=Menu(menu, tearoff=False)
 menuMore=Menu(menu, tearoff=False)
+#Si queremos acceder a los datos del grafo la clase AplGrafo nos es inservible de acuerdo al encapsulamiento de datos
 menuGraph.add_command(label="Ver Grafo", command=lambda :showFrameGrafo((apl.getGrafo())))
 menuSearch.add_command(label="Ver Búsquedas", command=showFrameSearchs)
 menuCities.add_command(label="Ciudad Origen y Destino",command=showFrameCities)

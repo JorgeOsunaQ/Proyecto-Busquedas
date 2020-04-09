@@ -6,7 +6,7 @@ class Vertice:
         self.adyacencias=ListaEnlazada()
         self.__g=0#A*
         self.__f=0#A*
-        self.__parent=None#A*
+        self.__come_from=None#A*
 
     def addAdjacency(self, vertice,peso=1):
         if(vertice is None):
@@ -27,7 +27,7 @@ class Vertice:
         return False
 
     def __str__(self):
-        temp=self.etiqueta+'-> '
+        temp=self.etiqueta
         if(self.adyacencias.is_empty()):
             temp+='Vertice Aislado'
         else:
@@ -36,7 +36,7 @@ class Vertice:
                 verticeActual=next(iterador)
                 nomVecino=verticeActual['neighboor'].etiqueta
                 pesoVecino=verticeActual['weight']
-                temp+=f'{nomVecino}({pesoVecino} km)->  '
+                temp+=f'-> {nomVecino} ({pesoVecino} km)'
         return temp
 
     def get_g(self): 
@@ -51,12 +51,12 @@ class Vertice:
     def set_f(self,value): 
         self.__f=value
 
-    def get_parent(self): 
-        return self.__parent
+    def get_come_from(self): 
+        return self.__come_from
 
-    def set_parent(self,value): 
-        self.__parent=value
+    def set_come_from(self,value): 
+        self.__come_from=value
 
     g=property(get_g, set_g)
     f=property(get_f, set_f)
-    parent=property(get_parent, set_parent)
+    come_from=property(get_come_from, set_come_from)

@@ -1,5 +1,6 @@
-from ListaEnlazada import ListaEnlazada
-from Vertice import Vertice
+from ListaEnlazada import *
+from Vertice import *
+from Rutinas import *
 class Grafo:
 
     def __init__(self):
@@ -41,22 +42,19 @@ class Grafo:
         #Cola de vertices cerrados
         cerrados=[]
         #Mientras la cola de abiertos no esté vacía
+        iteraciones=''
+        count=0
         while(len(abiertos)!=0):
-            #Esto es unicamente una prueba de la busqueda en amplitud:
-            print('------------')
-            print('\nABIERTOS:')
-            for i in abiertos:
-                print(i.etiqueta)
-            print('\nCERRADOS')
-            for i in cerrados:
-                print(i.etiqueta)
-            print('------------')
+            count+=1
+            #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración 
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
             #Removemos el primer elemento de la cola de abiertos
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
             if(temp==dest):
                 cerrados.append(temp)
-                return cerrados
+                return cerrados,iteraciones;
+
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
                 cerrados.append(temp)
@@ -67,7 +65,7 @@ class Grafo:
                 #Si el vertice no ha sido abierto aún se agrega a la cola de abiertos
                 if((vecino not in abiertos) and (vecino not in cerrados)):
                     abiertos.append(vecino)
-        return False
+        return False,iteraciones;
 
     #Algoritmo para trazar busqueda en profundidad
     def depth_first_search(self,source,dest):
@@ -77,24 +75,19 @@ class Grafo:
         #Cola de vertices cerrados
         cerrados=[]
         #Mientras la cola de abiertos no esté vacía
+        iteraciones=''
+        count=0
         while(len(abiertos)!=0):
-            
-            #Esto es unicamente una prueba de la busqueda en profundidad:
-            print('------------')
-            print('\nABIERTOS:')
-            for i in abiertos:
-                print(i.etiqueta)
-            print('\nCERRADOS')
-            for i in cerrados:
-                print(i.etiqueta)
-            print('------------')
-            
+            count+=1
+            #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+
             #Removemos el primer elemento de la pila de abiertos
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
             if(temp==dest):
                 cerrados.insert(0,temp)
-                return cerrados
+                return cerrados,iteraciones;
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
                 cerrados.insert(0,temp)
@@ -107,7 +100,7 @@ class Grafo:
                 if((vecino not in abiertos) and (vecino not in cerrados)):
                     listTemp.append(vecino)
             abiertos=listTemp+abiertos
-        return False
+        return False,iteraciones;
 
     #Opción no.1
     def branch_and_bound_search(self,source,dest):
@@ -117,7 +110,13 @@ class Grafo:
         path=[]
         cerrados=[]
         source.f=0
+        iteraciones=''
+        count=0
         while(len(abiertos)!=0):
+            count+=1
+            #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+
             temp=abiertos.pop(0)
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
@@ -127,7 +126,7 @@ class Grafo:
                 self.reconstruct_path(temp,path)
                 Grafo.set_default_values(cerrados) 
                 Grafo.set_default_values(abiertos)
-                return path
+                return path,iteraciones;
             #Obtenemos los descendientes inmediatos del vertice
             iterador=iter(temp.adyacencias)
             for value in iterador:
@@ -143,14 +142,15 @@ class Grafo:
                     #Verificamos que f(n) del camino de la adyacencia sea nulo o menor al que encontramos
                     if((vecino.f==0) or (f<vecino.f)):
                         #Agregamos la adyacencia a la lista de vértices por visitar
-                        abiertos.append(vecino)
+                        if(vecino not in abiertos):
+                            abiertos.append(vecino)
                         #Asignamos los valores del camino encontrado al vertice
                         vecino.g=f
                         vecino.f=f
-                        vecino.parent=temp
+                        vecino.come_from=temp
             #Ordenamos la lista de visitados de acuerdo al costo total f(n) de los vértices
             abiertos.sort(key=Grafo.sort_by_f)         
-        return False
+        return False,iteraciones;
 
     def __str__(self):
         temp=''
@@ -176,11 +176,7 @@ class Grafo:
         if (dest==None):
             return
         
-        cls.reconstruct_path(dest.parent,path)
-
-        print (str(dest.etiqueta))
-        h=round(dest.f-dest.g,2)
-        print ('G:'+str(dest.g)+' F:'+str(dest.f)+' H:'+str(h))
+        cls.reconstruct_path(dest.come_from,path)
         path.append(dest)
     
     @classmethod 
@@ -188,4 +184,22 @@ class Grafo:
         for i in list:
             i.set_f(0)
             i.set_g(0)
-            i.set_parent(None)
+            i.set_come_from(None)
+
+    @classmethod
+    def heuristics(cls,node,goal):
+        coor1=(node.latitud,node.longitud)
+        coor2=(goal.latitud,goal.longitud)
+        return round(Rutinas.haversine_function(coor1,coor2),2)
+    
+    @classmethod 
+    def get_iteracion(cls, abiertos, cerrados,dest,count):
+            iteracion=''
+            iteracion+=f'\nITERACIÓN #{count}\n'
+            iteracion+='ABIERTOS:\n'
+            for i in abiertos:
+                iteracion+=f'{i.etiqueta}\nF(n):{i.f} G(n):{i.g} H(n):{Grafo.heuristics(i,dest)}\n'
+            iteracion+='\nCERRADOS:\n'
+            for i in cerrados:
+                iteracion+=f'{i.etiqueta}\n'
+            return iteracion

@@ -15,8 +15,10 @@ class AplGrafoCiudades:
     def agrega_colindantes(self):
         for index, arista in self.df_aristas.iterrows():
             self.grafo.add_arista(arista['Src'],arista['Dest'],arista['Distancia(KM)'])
+
     def getGrafo(self):
         return self.grafo.__str__()
+        
 def menu(apl):
     res=-1
 
@@ -75,24 +77,25 @@ def busquedas(grafo):
                 
             if(res==1):
                 print('----Busqueda en amplitud----')
-                path=grafo.breadth_first_search(source,dest)
+                path,dem=grafo.breadth_first_search(source,dest)
             elif(res==2):
                 print('----Busqueda en profundidad----')
-                path=grafo.depth_first_search(source,dest)
+                path,dem=grafo.depth_first_search(source,dest)
             elif(res==3):
                 print('----Busqueda Best First----')
-                path=grafo.best_first_search(source,dest)
+                path,dem=grafo.best_first_search(source,dest)
             elif(res==4):
                 print('----Busqueda Branch and Bound----')
-                path=grafo.branch_and_bound_search(source,dest)
+                path,dem=grafo.branch_and_bound_search(source,dest)
             elif(res==5):
                 print('----Busqueda A star----')
-                path=grafo.A_star_search(source,dest)
+                path,dem=grafo.A_star_search(source,dest)
+            print(dem)
             if(path!=None and path):
                 path_res=''
                 for x in path:
                     path_res+=x.etiqueta+'->'
-                print('\nCamino encontrado: '+path_res)            
+                print('Camino encontrado: '+path_res)            
                 
         except ValueError:
             print('\nError: Ingrese un valor entero')
