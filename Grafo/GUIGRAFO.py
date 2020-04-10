@@ -15,13 +15,12 @@ class GUIFRAFO:
         root.iconbitmap("Grafo\Contenido\icono")
         #------ DEFINICIÓN DEL MENU ---------#
         menu=Menu(root)
-        root.config(menu=menu,width=700,height=600)
+        root.config(menu=menu,width=400,height=400)
         menuGraph=Menu(menu, tearoff=False)
         menuSearch=Menu(menu, tearoff=False)
         menuCities=Menu(menu, tearoff=False)
         menuExit=Menu(menu, tearoff=False)
         menuMore=Menu(menu, tearoff=False)
-        #Si queremos acceder a los datos del grafo la clase AplGrafo nos es inservible de acuerdo al encapsulamiento de datos
         menuGraph.add_command(label="Ver Grafo", command=lambda :showFrameGrafo(str(self.grafo)))
         menuSearch.add_command(label="Ver Búsquedas", command=lambda : showFrameSearchs(self))
         menuCities.add_command(label="Ciudad Origen y Destino",command=lambda : showFrameCities(self))
@@ -30,13 +29,14 @@ class GUIFRAFO:
         menu.add_cascade(label="Búsquedas",menu=menuSearch)
         menu.add_cascade(label="Ciudades",menu=menuCities)
         menu.add_cascade(label="Acerca De",menu=menuMore)
-        menu.add_cascade(label="Salir",menu=menuExit,command=lambda : root.destroy())
         self.origen = ""
         self.destino=" "
         root.mainloop()  
 
 
     #-------FUNCIONES A EVENTOS ---------#
+
+#----METODO PARA DESPLEGAR LA VENTANA GRAFO-----
 def showFrameGrafo(grafo):
     ventana= Tk()
     ventana.geometry("1300x500")
@@ -54,6 +54,7 @@ def showFrameGrafo(grafo):
     textArea.config(state="disabled")
     ventana.mainloop()
 
+#----METODO PARA DESPLEGAR LA VENTANA BUSQUEDAS-----
 def showFrameSearchs(self):
     if self.origen=='' or self.destino=='':
         tkinter.messagebox.showinfo('Busquedas',f'CIUDADES NO SELECCIONADAS')
@@ -67,20 +68,18 @@ def showFrameSearchs(self):
     comboBusquedas = ttk.Combobox(ventana, state="readonly", values=[ "Profundidad", "Amplitud", "Best First","Branch And Bound", "A*"])
     comboBusquedas.grid(column=0, row=1)
     comboBusquedas.current(0)
-    #comboBusquedas.place(x="235",y="80")
     textArea= Text(ventana, width="80", height="20",font=('Arial',13))
     scrollbar = Scrollbar(ventana, command=textArea.yview)
     textArea['yscrollcommand']=scrollbar.set
     textArea.grid(row=6, column=0,padx="8", pady="10")
-    #textArea.place(y="120")
     scrollbar.grid(row=6, column=1,sticky='nsew')
-    #scrollbar.place(x="520", y="190")
     comboBusquedas.bind("<<ComboboxSelected>>", lambda event:selection_changed(comboBusquedas.current(),textArea, self.origen,self.destino,self.grafo))
     ventana.grid_columnconfigure(0,weight=1)
     selection_changed(comboBusquedas.current(),textArea, self.origen,self.destino,self.grafo) 
+    Button(ventana,text="SALIR", command=lambda :ventana.destroy()).place(x="700",y="560")
     ventana.mainloop()
 
-
+#----METODO PARA DESPLEGAR LA VENTANA CIUDADES-----
 def showFrameCities(self):
     ventana= Tk()
     ventana.geometry("400x240")
@@ -102,16 +101,25 @@ def showFrameCities(self):
     Button(ventana,text="SALIR", command=lambda :ventana.destroy()).place(x="350",y="210")
     ventana.mainloop()
 
-def exit(self):
+#----METODO PARA DESPLEGAR LA VENTANA ACERCA DE-----
+def showmore():
     ventana= Tk()
-    ventana.geometry("300x300")
-    ventana.mainloop()
+    ventana.geometry("400x400")
+    ventana.iconbitmap("Grafo\Contenido\icono")
+    ventana.title("PROYECTO")
+    Label(ventana,text="PROYECTO", font=("bold",20)).place(x="125",y="10")
+    Label(ventana,text="INTEGRANTES", font=13).place(x="150",y="60")
+    Label(ventana,text="ABITIA ROJO ENDHIR FERNANDO").place(x="105",y="85")
+    Label(ventana,text="OSUNA QUINTANA JORGE").place(x="125",y="110")
+    Label(ventana,text="REYES RIVERA JOEL").place(x="142",y="135")
+    Label(ventana,text="DESCRIPCIÓN", font=13).place(x="140",y="175")
+    textArea= Text(ventana, width="53", height="9",font=('Arial',10))
+    textArea.grid(row=6, column=0,padx="8", pady="10")
+    textArea.place(x="20", y="200")
+    textArea.insert(INSERT,"En este proyecto se llevó a cabo el desarrollo e implementación de distintos algoritmos de búsqueda ampliamente utilizados en  inteligencia artificial, con la finalidad de apreciar las ventajas y  características propias que ofrece cada uno de ellos. Para ello  se desarrolló una estructura tipo grafo, la cual, está compuesta de un conjunto elementos representados como vértices, y sus   respectivas adyacencias, cada uno de estos con sus propiedad-es básicas y necesarias para formar las aristas, que, represent-an la conexión entre un vértice a otro.")
+    Button(ventana,text="SALIR",font="bold", command=lambda :ventana.destroy() ).place(x="330",y="360")
 
-def showmore(self):
-    ventana= Tk()
-    ventana.geometry("300x300")
-    ventana.mainloop()
-
+#----METODO PARA GUARDAR CIUDADES-----
 def saveCities(comboOrigen, comoDestino, self,ventana ):
     if comboOrigen == comoDestino:
         tkinter.messagebox.showinfo('Guardar',f'ORIGEN Y DESTINO IGUALES\n') 
@@ -122,6 +130,7 @@ def saveCities(comboOrigen, comoDestino, self,ventana ):
     if(msg=='ok'):
         ventana.destroy()
 
+#----METODO PARA MOSTRAR LAS BUSQUEDAS EN UN CAMBIO DEL COMBOBOX-----
 def selection_changed(busqueda, textArea, origen, destino, grafo):
     textArea.delete(1.0,END)
     source=grafo.search_vertice(origen)
@@ -158,7 +167,5 @@ if __name__ == "__main__":
     apl.agrega_ciudades()
     apl.agrega_colindantes()
     grafo=apl.get_grafo()
-    #Las capitales las tenemos en un archivo csv
-    #capitales=["Culiacan","La paz","Mexicali","Durango","Hermosillo","Chihuahua","Saltillo","Zacatecas","Tepic","Monterrey","Ciudad Victoria","San Luis Potosi","Aguascalientes","Guadalajara","Colima", "Guanajuato","Queretaro","Morelia","Chilpancingo", "Pachuca","Cuarnavaca","Toluca","CDMX", "Xalapa","Villahermosa","Campeche", "Merida", "Chetumal", "Tlaxcala", "Puebla", "Tuxla"]
     capitales=apl.get_list_ciudades()
     Grafo= GUIFRAFO(grafo,capitales)
