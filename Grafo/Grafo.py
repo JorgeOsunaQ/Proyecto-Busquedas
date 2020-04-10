@@ -47,7 +47,7 @@ class Grafo:
         while(len(abiertos)!=0):
             count+=1
             #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración 
-            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count,False)
             #Removemos el primer elemento de la cola de abiertos
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
@@ -80,17 +80,17 @@ class Grafo:
         while(len(abiertos)!=0):
             count+=1
             #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración
-            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count,False)
 
             #Removemos el primer elemento de la pila de abiertos
             temp=abiertos.pop(0)
             #Si es igual al vertice de destino entonces se encontró la ruta
             if(temp==dest):
-                cerrados.insert(0,temp)
+                cerrados.append(temp)
                 return cerrados,iteraciones;
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
-                cerrados.insert(0,temp)
+                cerrados.append(temp)
             #Obtenemos los descendientes inmediatos del vertice
             iterador=iter(temp.adyacencias)
             listTemp=[]
@@ -115,7 +115,7 @@ class Grafo:
         while(len(abiertos)!=0):
             count+=1
             #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración
-            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count,True)
 
             temp=abiertos.pop(0)
             #Si no está en la cola de cerrados entonces lo agregamos
@@ -193,12 +193,18 @@ class Grafo:
         return round(Rutinas.haversine_function(coor1,coor2),2)
     
     @classmethod 
-    def get_iteracion(cls, abiertos, cerrados,dest,count):
+    def get_iteracion(cls, abiertos, cerrados,dest,count,is_informed):
             iteracion=''
             iteracion+=f'\nITERACIÓN #{count}\n'
             iteracion+='ABIERTOS:\n'
-            for i in abiertos:
-                iteracion+=f'{i.etiqueta}\nF(n):{i.f} G(n):{i.g} H(n):{Grafo.heuristics(i,dest)}\n'
+
+            if(is_informed):
+                for i in abiertos:
+                    iteracion+=f'{i.etiqueta}\nF(n):{str(round(i.f,2))} G(n):{i.g} H(n):{Grafo.heuristics(i,dest)}\n'
+            else:
+                for i in abiertos:
+                    iteracion+=f'{i.etiqueta}\n'
+
             iteracion+='\nCERRADOS:\n'
             for i in cerrados:
                 iteracion+=f'{i.etiqueta}\n'

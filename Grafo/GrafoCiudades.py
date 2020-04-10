@@ -23,7 +23,7 @@ class GrafoCiudades(Grafo):
         while(len(abiertos)!=0):
             count+=1
             #Guardamos las iteraciones por las que pasa el algoritmo como mera demostración
-            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count,True)
 
             #Removemos el primer elemento de la cola de abiertos
             temp=abiertos.pop(0)
@@ -95,11 +95,13 @@ class GrafoCiudades(Grafo):
             cerrados.append(actual)
             #Ordenamos la lista de visitados de acuerdo al costo total f(n) de los vértices
             abiertos.sort(key=Grafo.sort_by_f)
-            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count)
+            iteraciones+=Grafo.get_iteracion(abiertos,cerrados,dest,count,True)
 
             #actual=abiertos.pop(indice)
             actual=abiertos.pop(0)
         path=[]
+        if(actual==dest):
+            cerrados.append(actual)
         GrafoCiudades.reconstruct_path(actual,path)
         Grafo.set_default_values(abiertos)
         Grafo.set_default_values(cerrados) 

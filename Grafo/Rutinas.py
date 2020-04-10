@@ -1,6 +1,5 @@
 import math
 import pandas as pd
-
 class Rutinas(object):
 
     E_Radius=6378
@@ -19,3 +18,11 @@ class Rutinas(object):
         c=2*math.atan2(math.sqrt(a),math.sqrt(1-a))
         d=cls.E_Radius*c
         return d
+
+    @staticmethod
+    def get_datos_ciudades():
+        return pd.read_csv('Grafo\CSV\ciudades.csv')
+
+    @staticmethod
+    def get_conexiones_ciudades():
+        return pd.read_csv('Grafo\CSV\conexiones.csv')

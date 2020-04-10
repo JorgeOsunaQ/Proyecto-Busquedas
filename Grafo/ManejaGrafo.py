@@ -1,12 +1,12 @@
 from GrafoCiudades import GrafoCiudades
-import pandas as pd 
-class AplGrafoCiudades:
+from Rutinas import *
+class ManejaGrafo:
 
     def __init__(self):
         self.grafo=GrafoCiudades()
         #Falta manejo de excepciones (en todo el código)
-        self.df_ciudades=pd.read_csv('Grafo\CSV\ciudades.csv')
-        self.df_aristas=pd.read_csv('Grafo\CSV\conexiones.csv')
+        self.df_ciudades=Rutinas.get_datos_ciudades()
+        self.df_aristas=Rutinas.get_conexiones_ciudades()
 
     def agrega_ciudades(self):
         for index,ciudad in self.df_ciudades.iterrows():
@@ -16,6 +16,8 @@ class AplGrafoCiudades:
         for index, arista in self.df_aristas.iterrows():
             self.grafo.add_arista(arista['Src'],arista['Dest'],arista['Distancia(KM)'])
 
-    def getGrafo(self):
-        return self.grafo.__str__()
+    def get_list_ciudades(self):
+        return self.df_ciudades['Ciudad'].tolist()    
         
+    def get_grafo(self):
+        return self.grafo
