@@ -28,16 +28,15 @@ class GrafoCiudades(Grafo):
             #Removemos el primer elemento de la cola de abiertos
             temp=abiertos.pop(0)
 
-            #Si es igual al vertice de destino entonces se encontró la ruta
-            if(temp==dest):
-                cerrados.append(temp)
-                Grafo.set_default_values(abiertos)
-                Grafo.set_default_values(cerrados)
-                return cerrados,iteraciones
-
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
                 cerrados.append(temp)
+
+            #Si es igual al vertice de destino entonces se encontró la ruta
+            if(temp==dest):
+                Grafo.set_default_values(abiertos)
+                Grafo.set_default_values(cerrados)
+                return cerrados,iteraciones
 
             #Obtenemos los descendientes inmediatos del vertice
             iterador=iter(temp.adyacencias)

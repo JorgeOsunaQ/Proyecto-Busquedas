@@ -121,6 +121,7 @@ class Grafo:
             #Si no está en la cola de cerrados entonces lo agregamos
             if(temp not in cerrados):
                 cerrados.append(temp)
+
             #Si el vértice temp coincide con el vértice de destino entonces reconstruimos su paso para obtener el camino
             if(temp==dest):
                 self.reconstruct_path(temp,path)
@@ -196,16 +197,16 @@ class Grafo:
     def get_iteracion(cls, abiertos, cerrados,dest,count,is_informed):
             iteracion=''
             iteracion+=f'\nITERACIÓN #{count}\n'
-            iteracion+='ABIERTOS:\n'
+            iteracion+='ABIERTOS: '
 
             if(is_informed):
                 for i in abiertos:
-                    iteracion+=f'{i.etiqueta}\nF(n):{str(round(i.f,2))} G(n):{i.g} H(n):{Grafo.heuristics(i,dest)}\n'
+                    iteracion+=f'\n{i.etiqueta}\nF(n):{str(round(i.f,2))} G(n):{i.g} H(n):{Grafo.heuristics(i,dest)}'   
             else:
-                for i in abiertos:
-                    iteracion+=f'{i.etiqueta}\n'
-
-            iteracion+='\nCERRADOS:\n'
-            for i in cerrados:
-                iteracion+=f'{i.etiqueta}\n'
+                iteracion+=', '.join(i.etiqueta for i in abiertos)     
+                
+            iteracion+='\n\nCERRADOS: '
+            iteracion+=', '.join(i.etiqueta for i in cerrados)+'\n'
             return iteracion
+
+
